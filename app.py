@@ -16,24 +16,13 @@ model = joblib.load("ev_blast_prediction.pkl")
 
 import streamlit as st
 import numpy as np
-import pickle
+
+model = joblib.load("/content/wine_type_prediction.pkl")
 
 # Page config (must be first)
 st.set_page_config(page_title="Battery Health Prediction")
-
-# Load model
-
-
 st.title("🔋 Battery Health Prediction App")
 st.write("Predict **Battery Health** based on risk and design factors")
-
-# Inputs (match column order exactly)
-Battery_Type = st.selectbox(
-    "Battery Type",
-    options=[0, 1],  # change if you used label encoding
-    format_func=lambda x: "Lithium-ion" if x == 1 else "Other"
-)
-
 Poor_Cell_Design = st.selectbox("Poor Cell Design",value=None )
 External_Abuse = st.selectbox("External Abuse",value=None )
 Poor_Battery_Design = st.selectbox("Poor Battery Design",value=None)
