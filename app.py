@@ -22,8 +22,7 @@ import pickle
 st.set_page_config(page_title="Battery Health Prediction")
 
 # Load model
-with open("ev_blast_prediction.pkl", "rb") as f:
-    model = pickle.load(f)
+
 
 st.title("🔋 Battery Health Prediction App")
 st.write("Predict **Battery Health** based on risk and design factors")
