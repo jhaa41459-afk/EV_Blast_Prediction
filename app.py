@@ -17,7 +17,7 @@ model = joblib.load("ev_blast_prediction.pkl")
 import streamlit as st
 import numpy as np
 
-model = joblib.load("/content/wine_type_prediction.pkl")
+model = joblib.load("ev_blast_prediction.pkl")
 
 # Page config (must be first)
 st.set_page_config(page_title="Battery Health Prediction")
