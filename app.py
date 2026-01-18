@@ -8,7 +8,7 @@ Original file is located at
 """
 
 
-iimport numpy as np
+import numpy as np
 import joblib
 import streamlit as st
 
