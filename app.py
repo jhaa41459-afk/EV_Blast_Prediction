@@ -44,11 +44,7 @@ if st.button("Predict"):
 
     prediction = model.predict(input_data)[0]
 
-   if prediction == "Blast":
-        st.error("💥 Battery Health: **BLAST RISK**")
-    elif prediction == "Chance_of_Blast":
-        st.warning("⚠️ Battery Health: **CHANCE OF BLAST**")
-    elif prediction == "Moderate":
-        st.info("🔋 Battery Health: **MODERATE**")
+ if prediction == 1:
+        st.error("💥 EV Battery Status: **BLAST RISK**")
     else:
-        st.success("✅ Battery Health: **GOOD**")
+        st.success("✅ EV Battery Status: **SAFE**")
