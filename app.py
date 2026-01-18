@@ -12,46 +12,40 @@ import numpy as np
 import joblib
 import streamlit as st
 
+# Load model
 model = joblib.load("ev_blast_prediction.pkl")
 
-import streamlit as st
-import numpy as np
+st.set_page_config(page_title="EV Battery Blast Prediction")
+st.title("🔋 EV Battery Blast Prediction App")
+st.write("Predict whether the EV battery condition is **Safe** or **Blast Risk**")
 
-model = joblib.load("ev_blast_prediction.pkl")
+# Inputs (same pattern as wine app)
+battery_type = st.number_input("Battery Type (0: Li-ion, 1: Li-polymer, 2: Lead-acid)", value=None)
+poor_cell_design = st.number_input("Poor Cell Design (0 = No, 1 = Yes)", value=None)
+external_abuse = st.number_input("External Abuse (0 = No, 1 = Yes)", value=None)
+poor_battery_design = st.number_input("Poor Battery Design (0 = No, 1 = Yes)", value=None)
+short_circuits = st.number_input("Short Circuits (0 = No, 1 = Yes)", value=None)
+temperature = st.number_input("Operating Temperature (°C)", value=None)
+overcharge_overdischarge = st.number_input("Overcharge / Overdischarge (0 = No, 1 = Yes)", value=None)
+battery_maintenance = st.number_input("Battery Maintenance (0 = Poor, 1 = Good)", value=None)
 
-# Page config (must be first)
-st.set_page_config(page_title="Battery Health Prediction")
-st.title("🔋 Battery Health Prediction App")
-st.write("Predict **Battery Health** based on risk and design factors")
-Poor_Cell_Design = st.selectbox("Poor Cell Design",value=None )
-External_Abuse = st.selectbox("External Abuse",value=None )
-Poor_Battery_Design = st.selectbox("Poor Battery Design",value=None)
-Short_Circuits = st.selectbox("Short Circuits",value=None)
-Temperature = st.number_input("Operating Temperature (°C)", value=None)
-Overcharge_Overdischarge = st.selectbox("Overcharge / Overdischarge", value=None)
-Battery_Maintenance = st.selectbox("Battery Maintenance", value=None)
-
-# Prediction
-if st.button("Predict Battery Health"):
-    input_data = np.array([[
-        Battery_Type,
-        Poor_Cell_Design,
-        External_Abuse,
-        Poor_Battery_Design,
-        Short_Circuits,
-        Temperature,
-        Overcharge_Overdischarge,
-        Battery_Maintenance
+# Prediction (same logic as wine app)
+if st.button("Predict"):
+    input_data = np.array([[ 
+        battery_type,
+        poor_cell_design,
+        external_abuse,
+        poor_battery_design,
+        short_circuits,
+        temperature,
+        overcharge_overdischarge,
+        battery_maintenance
     ]])
 
-prediction = model.predict(input_data)[0]
+    prediction = model.predict(input_data)[0]
 
-    # Output labels (from CSV)
-if prediction == "Blast":
-        st.error("💥 Battery Health: **BLAST RISK**")
-elif prediction == "Chance_of_Blast":
-        st.warning("⚠️ Battery Health: **CHANCE OF BLAST**")
-elif prediction == "Moderate":
-        st.info("🔋 Battery Health: **MODERATE**")
-else:
-        st.success("✅ Battery Health: **GOOD**")
+    # Output
+    if prediction == 1:
+        st.error("💥 EV Battery Status: **BLAST RISK**")
+    else:
+        st.success("✅ EV Battery Status: **SAFE**")
