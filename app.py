@@ -7,12 +7,12 @@ Original file is located at
     https://colab.research.google.com/drive/135zFrdpZJ1VFVgF3GSOHiMQoNaljRpAy
 """
 
-!pip install streamlit
+
 import numpy as np
 import joblib
 import streamlit as st
 
-model = joblib.load(/content/ev_blast_prediction.pkl"")
+model = joblib.load("ev_blast_prediction.pkl")
 
 import streamlit as st
 import numpy as np
