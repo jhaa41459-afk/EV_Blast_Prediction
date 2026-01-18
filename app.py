@@ -8,7 +8,7 @@ Original file is located at
 """
 
 
-import numpy as np
+iimport numpy as np
 import joblib
 import streamlit as st
 
@@ -44,7 +44,8 @@ if st.button("Predict"):
 
     prediction = model.predict(input_data)[0]
 
- if prediction == 1:
+    # Output
+    if prediction == 1:
         st.error("💥 EV Battery Status: **BLAST RISK**")
     else:
         st.success("✅ EV Battery Status: **SAFE**")
